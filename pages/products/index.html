@@ -1,0 +1,24 @@
+<main>
+  <p><a href="/">Intent OS</a> / Products</p>
+  <h1>Products</h1>
+  <section data-layout="grid">
+    <x-list name="products" of="Product" as="p" page="24" filter="category" sort="sort">
+      <article>
+        <a href="/products/{{p.slug}}">
+          <h2>{{p.name}}</h2>
+          <p>{{p.detail}}</p>
+          <x-money value="{{p.price}}"></x-money>
+        </a>
+        <form action="/_app/action/cart.add" method="post" data-action="cart.add">
+          <input type="hidden" name="productId" value="{{p.id}}">
+          <input type="hidden" name="quantity" value="1">
+          <button data-action="cart.add({{p.id}})" type="submit">Add to cart</button>
+        </form>
+      </article>
+    </x-list>
+  </section>
+  <aside aria-live="polite">
+    <span data-fragment="cart-count">0</span> items · <strong data-fragment="cart-total">€0.00</strong>
+    <p data-fragment="toast" role="status"></p>
+  </aside>
+</main>

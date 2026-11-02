@@ -1,0 +1,10 @@
+<main>
+  <p><a href="/cart">Cart</a> / Checkout</p>
+  <h1>Checkout</h1>
+  <section data-fragment="order" aria-live="polite"></section>
+  <form method="post" action="/_app/action/checkout.create">
+    <input type="hidden" name="orderId" value="">
+    <button type="submit">Pay securely with Stripe</button>
+  </form>
+  <p>Payment confirmation comes from Stripe’s signed webhook.</p>
+</main>

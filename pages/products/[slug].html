@@ -1,0 +1,17 @@
+<x-record of="Product" by="slug" as="p">
+  <main data-layout="split">
+    <p><a href="/products">Products</a> / {{p.name}}</p>
+    <h1>{{p.name}}</h1>
+    <p>{{p.description}}</p>
+    <x-money value="{{p.price}}"></x-money>
+    <form action="/_app/action/cart.add" method="post" data-action="cart.add">
+      <input type="hidden" name="productId" value="{{p.id}}">
+      <input type="hidden" name="quantity" value="1">
+      <button data-action="cart.add({{p.id}})" type="submit">Add to cart</button>
+    </form>
+    <aside aria-live="polite">
+      <span data-fragment="cart-count">0</span> items · <strong data-fragment="cart-total">€0.00</strong>
+      <p data-fragment="toast" role="status"></p>
+    </aside>
+  </main>
+</x-record>

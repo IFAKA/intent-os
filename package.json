@@ -1,0 +1,40 @@
+{
+  "name": "intent-os",
+  "version": "0.1.0",
+  "description": "Intent-first server-rendered commerce runtime",
+  "private": false,
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "type": "module",
+  "files": [
+    "bin/",
+    "framework/",
+    "schema.js",
+    "server.js",
+    "src/data/products.js",
+    "public/",
+    "pages/",
+    "app.config.js",
+    "theme.css",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./framework/app.js",
+    "./framework/*": "./framework/*",
+    "./schema": "./schema.js",
+    "./cli": "./bin/intent-os.js"
+  },
+  "bin": {
+    "intent-os": "./bin/intent-os.js"
+  },
+  "scripts": {
+    "dev": "node server.js",
+    "server": "node server.js",
+    "start": "NODE_ENV=production node server.js",
+    "test:syntax": "for file in schema.js app.config.js $(find src framework public bin -name '*.js' -print); do node --check \"$file\"; done",
+    "test:unit": "node --test tests/*.test.mjs",
+    "test": "npm run test:syntax && npm run test:unit",
+    "check": "npm test && node bin/intent-os.js generate schema --check"
+  }
+}

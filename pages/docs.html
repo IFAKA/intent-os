@@ -1,0 +1,126 @@
+<main class="docs-page">
+  <div class="docs-noise" aria-hidden="true"></div>
+  <header class="docs-header docs-wrap">
+    <a class="docs-brand" href="/" aria-label="Intent OS home"><span class="docs-mark">i</span><span>Intent OS</span></a>
+    <nav class="docs-nav" aria-label="Developer portal navigation">
+      <a href="#quick-start">Quick start</a>
+      <a href="#model">The model</a>
+      <a href="/docs/guide">Full guide</a>
+      <a href="#production">Production</a>
+      <a class="docs-nav-button" href="/products">Open demo <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <section class="docs-hero docs-wrap">
+    <div class="docs-hero-copy">
+      <p class="docs-kicker"><span class="docs-live-dot"></span> Local runtime lab · v0.1</p>
+      <h1>Build by describing the <em>surface.</em></h1>
+      <p class="docs-hero-lede">Intent OS is an agent-oriented application runtime. Your team shapes pages, data, and product intent. The framework keeps routing, authority, sessions, validation, and infrastructure in one dependable place.</p>
+      <div class="docs-hero-actions">
+        <a class="docs-button docs-button-primary" href="#quick-start">Start building <span aria-hidden="true">↓</span></a>
+        <a class="docs-button docs-button-quiet" href="/">Inspect the running lab <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="docs-hero-aside">
+      <div class="docs-signal-card">
+        <span class="docs-card-label">The handoff</span>
+        <strong>Intent → Runtime → Surface</strong>
+        <span class="docs-card-note">A smaller authoring surface for humans and coding agents.</span>
+      </div>
+      <div class="docs-metric-row"><span>Server authority</span><b>ON</b></div>
+      <div class="docs-metric-row"><span>Browser state</span><b>MINIMAL</b></div>
+      <div class="docs-metric-row"><span>External services</span><b>LATER</b></div>
+    </div>
+  </section>
+
+  <section class="docs-section docs-wrap" id="quick-start">
+    <div class="docs-section-heading">
+      <p class="docs-kicker">01 / First contact</p>
+      <h2>From zero to a working app in three moves.</h2>
+      <p>Everything below works locally with the repository as it stands today. No account provider or payment account is required to explore the runtime.</p>
+    </div>
+    <div class="docs-steps">
+      <article class="docs-step">
+        <span class="docs-step-number">01</span>
+        <h3>Install the runtime</h3>
+        <p>Clone the project, install dependencies, and verify the framework before an agent touches the app.</p>
+        <pre><code>npm install\nnpm test</code></pre>
+      </article>
+      <article class="docs-step docs-step-accent">
+        <span class="docs-step-number">02</span>
+        <h3>Make a starter app</h3>
+        <p>The generator creates only application-owned files and leaves existing work untouched.</p>
+        <pre><code>npx intent-os create my-store\ncd my-store\nnpx intent-os dev</code></pre>
+      </article>
+      <article class="docs-step">
+        <span class="docs-step-number">03</span>
+        <h3>Shape the surface</h3>
+        <p>Edit the files agents can understand at a glance. The runtime supplies the authority behind them.</p>
+        <pre><code>pages/\nschema.js\napp.config.js\ntheme.css\nsrc/</code></pre>
+      </article>
+    </div>
+  </section>
+
+  <section class="docs-model" id="model">
+    <div class="docs-wrap docs-model-grid">
+      <div class="docs-section-heading docs-model-heading">
+        <p class="docs-kicker">02 / The model</p>
+        <h2>Declare the shape. Let the runtime carry the weight.</h2>
+        <p>Application code stays close to the product. Cross-cutting behavior stays in the framework where every route and action can share it.</p>
+      </div>
+      <div class="docs-flow" aria-label="Intent OS request flow">
+        <div class="docs-flow-node"><span>01</span><strong>Intent</strong><small>pages · schema · config</small></div>
+        <div class="docs-flow-arrow" aria-hidden="true">→</div>
+        <div class="docs-flow-node docs-flow-node-dark"><span>02</span><strong>Runtime</strong><small>route · validate · authorize</small></div>
+        <div class="docs-flow-arrow" aria-hidden="true">→</div>
+        <div class="docs-flow-node"><span>03</span><strong>Surface</strong><small>HTML · fragments · state</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="docs-section docs-wrap">
+    <div class="docs-section-heading">
+      <p class="docs-kicker">03 / Know the terrain</p>
+      <h2>The project has a clear ownership boundary.</h2>
+    </div>
+    <div class="docs-anatomy">
+      <div class="docs-tree"><span class="docs-tree-root">my-store/</span><span>├─ pages/ <i>your routes</i></span><span>├─ src/ <i>your data</i></span><span>├─ public/ <i>your browser assets</i></span><span>├─ schema.js <i>your data model</i></span><span>├─ app.config.js <i>your runtime intent</i></span><span>└─ theme.css <i>your visual language</i></span></div>
+      <div class="docs-anatomy-copy"><span class="docs-card-label">Framework-owned</span><h3>Authority is not scattered across the app.</h3><p>Routing, server actions, validation, CSRF, sessions, SQLite access, inventory, orders, and payment adapters live under <code>framework/</code>. That gives agents a stable contract to build against.</p><a class="docs-inline-link" href="#production">Read the production boundary <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </section>
+
+  <section class="docs-capabilities docs-wrap">
+    <div class="docs-section-heading">
+      <p class="docs-kicker">04 / Included now</p>
+      <h2>A useful local system, not a mockup.</h2>
+    </div>
+    <div class="docs-capability-grid">
+      <article><span>↯</span><h3>Server-rendered HTML</h3><p>Pages and fragments are compiled on the server with minimal browser JavaScript.</p></article>
+      <article><span>⌁</span><h3>Data authority</h3><p>SQLite-backed products, carts, customers, orders, inventory, sessions, and migrations.</p></article>
+      <article><span>◌</span><h3>Safe interactions</h3><p>CSRF tokens, input validation, rate limiting, secure headers, session rotation, and ownership checks.</p></article>
+      <article><span>↗</span><h3>Agent visibility</h3><p>Request traces, source tabs, generated-code ownership, CLI checks, and an executable benchmark harness.</p></article>
+    </div>
+  </section>
+
+  <section class="docs-production" id="production">
+    <div class="docs-wrap docs-production-grid">
+      <div class="docs-section-heading">
+        <p class="docs-kicker">05 / Before launch</p>
+        <h2>Local-ready is not the same as public-ready.</h2>
+        <p>Use the lab to build and test product behavior now. Complete these items before accepting real customer data or payments.</p>
+      </div>
+      <div class="docs-checklist">
+        <div class="docs-check docs-check-done"><span>✓</span><div><strong>Core application runtime</strong><small>Routes, actions, database, cart, checkout, and tests.</small></div><b>READY</b></div>
+        <div class="docs-check docs-check-done"><span>✓</span><div><strong>Local account and sessions</strong><small>SQLite persistence and session rotation are implemented.</small></div><b>READY</b></div>
+        <div class="docs-check"><span>○</span><div><strong>Production identity provider</strong><small>Connect passwordless email, OAuth, or your chosen provider.</small></div><b>LATER</b></div>
+        <div class="docs-check"><span>○</span><div><strong>Live payments and webhooks</strong><small>Add Stripe credentials, public HTTPS, and webhook configuration.</small></div><b>LATER</b></div>
+        <div class="docs-check"><span>○</span><div><strong>Operations layer</strong><small>Choose hosting, backups, monitoring, logs, and load-test thresholds.</small></div><b>LATER</b></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="docs-footer docs-wrap">
+    <div><a class="docs-brand" href="/"><span class="docs-mark">i</span><span>Intent OS</span></a><p>Build the surface. Inspect the system.</p></div>
+    <div class="docs-footer-links"><a href="/products">Demo store</a><a href="/account">Account surface</a><a href="#quick-start">Back to top ↑</a></div>
+  </footer>
+</main>

@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+:root { --ink: #18251f; --paper: #f1eee6; --teal: #0d6756; --clay: #b54d2e; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Georgia, serif; }
+button, input { font: inherit; }
+.shell { width: min(72rem, calc(100% - 2rem)); margin: auto; padding: 2rem 0; }
+.card { background: #fffdf7; border: 1px solid #d7d0bf; padding: 1.5rem; }

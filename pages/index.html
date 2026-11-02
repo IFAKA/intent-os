@@ -1,0 +1,44 @@
+<main class="landing-page">
+  <nav class="landing-nav" aria-label="Main navigation">
+    <a class="landing-brand" href="/" aria-label="IntentOS home"><span>i</span> IntentOS</a>
+    <div class="landing-links"><a href="/docs/guide">Docs</a><a href="/products">Demo store</a><a class="landing-nav-cta" href="/docs/guide#quick-start">Start building <span aria-hidden="true">↗</span></a></div>
+  </nav>
+
+  <section class="landing-hero" aria-labelledby="landing-title">
+    <div class="landing-hero-copy">
+      <p class="landing-kicker"><span></span> The intent-first application runtime</p>
+      <h1 id="landing-title">Describe the product.<br><em>Ship the system.</em></h1>
+      <p class="landing-lede">IntentOS gives coding agents a smaller surface for building serious server-rendered applications. Declare pages, data, and actions. The runtime carries routing, authority, persistence, and the repetitive edges.</p>
+      <div class="landing-actions"><a class="landing-button landing-button-primary" href="/docs#quick-start">Read the quick start <span aria-hidden="true">↓</span></a><a class="landing-button landing-button-secondary" href="/products">Open the demo store <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="landing-signal" aria-label="IntentOS runtime flow">
+      <div class="landing-signal-top"><span>RUNTIME / 01</span><span>v0.1</span></div>
+      <div class="landing-signal-flow"><div><b>01</b><strong>Intent</strong><small>pages · schema · config</small></div><i aria-hidden="true">→</i><div class="landing-signal-dark"><b>02</b><strong>Runtime</strong><small>route · validate · persist</small></div><i aria-hidden="true">→</i><div><b>03</b><strong>Surface</strong><small>HTML · fragments · state</small></div></div>
+      <p class="landing-signal-foot"><span></span> server authority / native HTML</p>
+    </div>
+  </section>
+
+  <section class="landing-code-section" aria-labelledby="landing-code-title">
+    <div class="landing-section-label">01 / The authoring surface</div>
+    <div class="landing-code-grid">
+      <div><h2 id="landing-code-title">Less mechanism.<br><em>More meaning.</em></h2><p>Application code stays close to the thing you are building. IntentOS turns a small declarative page into server-rendered HTML backed by validated, transactional domain behavior.</p><a class="landing-text-link" href="/docs#model">Explore the model <span aria-hidden="true">↗</span></a></div>
+      <pre class="landing-code"><code><span class="code-tag">&lt;x-list</span> <span class="code-attr">of</span>=<span class="code-string">"Product"</span> <span class="code-attr">as</span>=<span class="code-string">"p"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;article&gt;</span>
+    <span class="code-tag">&lt;h2&gt;</span>{{p.name}}<span class="code-tag">&lt;/h2&gt;</span>
+    <span class="code-tag">&lt;x-money</span> <span class="code-attr">value</span>=<span class="code-string">"{{p.price}}"</span> <span class="code-tag">/&gt;</span>
+    <span class="code-tag">&lt;button</span> <span class="code-attr">data-action</span>=<span class="code-string">"cart.add({{p.id}})"</span><span class="code-tag">&gt;</span>
+      Add to cart
+    <span class="code-tag">&lt;/button&gt;</span>
+  <span class="code-tag">&lt;/article&gt;</span>
+<span class="code-tag">&lt;/x-list&gt;</span></code></pre>
+    </div>
+  </section>
+
+  <section class="landing-capabilities" aria-labelledby="landing-capabilities-title"><div class="landing-section-label">02 / What the runtime owns</div><h2 id="landing-capabilities-title">A dependable center<br><em>for agent-built apps.</em></h2><div class="landing-capability-grid"><article><span>↯</span><h3>Server authority</h3><p>Prices, inventory, sessions, orders, and payment state stay on the trusted side of the boundary.</p></article><article><span>⌁</span><h3>Native surfaces</h3><p>Semantic HTML works without JavaScript, then gets enhanced with targeted fragments when it is available.</p></article><article><span>◌</span><h3>Inspectable systems</h3><p>Schema generation, migrations, request traces, tests, and ownership boundaries stay visible to the team.</p></article></div></section>
+
+  <section class="landing-start" aria-labelledby="landing-start-title"><div><div class="landing-section-label">03 / From zero to running</div><h2 id="landing-start-title">Start with a small<br><em>surface area.</em></h2></div><div class="landing-start-copy"><pre><code>npx intent-os create my-store
+cd my-store
+npx intent-os dev</code></pre><p>Edit <code>pages/</code>, <code>schema.js</code>, <code>app.config.js</code>, and <code>theme.css</code>. The <a href="/docs">developer portal</a> explains the rest.</p></div></section>
+
+  <footer class="landing-footer"><a class="landing-brand" href="/"><span>i</span> IntentOS</a><span>Build by intent. Inspect the system.</span><a href="/docs">Read the documentation →</a></footer>
+</main>

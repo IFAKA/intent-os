@@ -1,0 +1,27 @@
+node_modules/
+.next/
+coverage/
+test-results/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+.DS_Store
+
+# added for publishing
+node_modules/
+.venv*/
+venv/
+.env
+.env.*
+!.env.example
+.next/
+dist/
+build/
+out/
+target/
+.open-next/
+.wrangler/
+*.log
+.DS_Store
+tmp/
+test-results/

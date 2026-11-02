@@ -1,0 +1,18 @@
+<main class="account-shell">
+  <nav><a href="/">Intent OS</a> <span aria-hidden="true">/</span> <a href="/products">Products</a> <span aria-hidden="true">/</span> Account</nav>
+  <section class="account-card" data-fragment="account" aria-labelledby="account-title">
+    <p class="eyebrow">Identity boundary</p>
+    <h1 id="account-title">Keep your intent attached.</h1>
+    <p class="lede">A small account surface for saved carts, orders, and agent-built workflows.</p>
+    <p data-account-status role="status" aria-live="polite">Not signed in</p>
+    <form method="post" action="/_app/action/auth.login" data-account-login>
+      <label for="account-email">Email address</label>
+      <input id="account-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com">
+      <button type="submit">Continue with email</button>
+      <small>This starter uses a local development identity flow. Add passwordless email or an identity provider before production.</small>
+    </form>
+    <form method="post" action="/_app/action/auth.logout" data-account-logout>
+      <button type="submit">Sign out</button>
+    </form>
+  </section>
+</main>

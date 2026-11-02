@@ -1,0 +1,52 @@
+{
+  "intentOs": {
+    "root": "/Users/faka/code/projects/web/intent-os",
+    "filesTouched": 20,
+    "authoredLoc": 480,
+    "generatedTokensEstimate": 6917,
+    "browserJavaScriptBytes": 17739,
+    "browserCssBytes": 1292,
+    "distinctConceptsInvoked": {
+      "serverActions": true,
+      "fragments": true,
+      "schemaValidation": true,
+      "csrf": false,
+      "sessions": true,
+      "payments": true
+    }
+  },
+  "baseline": {
+    "root": "/Users/faka/code/projects/web/intent-os/benchmark/next-baseline",
+    "filesTouched": 16,
+    "authoredLoc": 146,
+    "generatedTokensEstimate": 1946,
+    "browserJavaScriptBytes": 0,
+    "browserCssBytes": 384,
+    "distinctConceptsInvoked": {
+      "serverActions": false,
+      "fragments": false,
+      "schemaValidation": true,
+      "csrf": false,
+      "sessions": true,
+      "payments": false
+    }
+  },
+  "comparison": {
+    "authoredLocRatio": 3.288,
+    "generatedTokensRatio": 3.554,
+    "filesTouchedRatio": 1.25,
+    "browserJavaScriptBytes": {
+      "intentOs": 17739,
+      "baseline": 0
+    },
+    "browserCssBytes": {
+      "intentOs": 1292,
+      "baseline": 384
+    },
+    "targets": {
+      "threeTimesLessLoc": false,
+      "fiftyPercentFewerTokens": false,
+      "fiftyPercentFewerFiles": false
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<main>
+  <p><a href="/products">Products</a> / Cart</p>
+  <h1>Cart</h1>
+  <p><span data-fragment="cart-count">0</span> items · <strong data-fragment="cart-total">€0.00</strong></p>
+  <form action="/cart" method="get" data-fragment-target="cart-summary">
+    <button type="submit">Refresh cart summary</button>
+  </form>
+  <p data-fragment-status role="status" aria-live="polite"></p>
+ <p data-fragment="cart-summary">Empty cart</p>
+ <ul data-fragment="cart-items"><li>Empty cart</li></ul>
+ <form action="/_app/action/order.create" method="post" data-action="order.create" data-fragment-target="order">
+  <button type="submit">Create order draft</button>
+ </form>
+ <section data-fragment="order" aria-live="polite"></section>
+</main>

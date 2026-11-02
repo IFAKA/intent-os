@@ -1,0 +1,52 @@
+button, a, input { font: inherit; }
+
+.button:focus-visible,
+.reset-button:focus-visible,
+.add-button:focus-visible,
+.code-tab:focus-visible,
+.copy-button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.product-card.is-added .add-button {
+  background: var(--acid);
+  color: var(--ink);
+}
+
+.code-explanation {
+  margin: 0;
+  padding: 0 18px 12px;
+  color: #aeb3a8;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.part-list button {
+  border: 1px solid var(--line);
+  background: transparent;
+  padding: 9px 11px;
+  color: var(--ink);
+  cursor: pointer;
+  font: 10px var(--mono);
+  text-transform: uppercase;
+}
+
+.part-list button:hover,
+.part-list button:focus-visible {
+  background: var(--acid);
+}
+
+.part-list button b {
+  margin-right: 8px;
+  color: var(--orange);
+  font-weight: 400;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .product-card { animation: none !important; }
+  .product-art i, .shop-surface, .add-button { transition: none; }
+}

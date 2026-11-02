@@ -1,0 +1,83 @@
+<main class="guide-page">
+  <header class="guide-header"><a class="landing-brand" href="/"><span>i</span> IntentOS</a><nav aria-label="Documentation"><a href="/docs">Portal</a><a href="/docs/guide#quick-start">Guide</a><a href="/products">Demo</a></nav></header>
+  <div class="guide-layout">
+    <aside class="guide-toc" aria-label="On this page"><p>DOCUMENTATION / GUIDE</p><a href="#quick-start">Quick start</a><a href="#mental-model">Mental model</a><a href="#project-structure">Project structure</a><a href="#pages">Pages and syntax</a><a href="#data">Data and schema</a><a href="#actions">Actions and forms</a><a href="#state">State and navigation</a><a href="#security">Security</a><a href="#migrations">Migrations</a><a href="#payments">Payments</a><a href="#testing">Testing</a><a href="#deployment">Deployment</a><a href="#boundaries">Boundaries</a></aside>
+    <article class="guide-content">
+      <p class="landing-kicker"><span></span> IntentOS framework guide</p>
+      <h1>Build by intent.<br><em>Learn the whole system.</em></h1>
+      <p class="guide-lede">This guide takes you from an empty directory to a tested, deployable server-rendered application. It is the canonical reference for the current IntentOS runtime.</p>
+
+      <section id="quick-start"><p class="guide-label">01 / Beginner</p><h2>Quick start</h2><p>IntentOS is a Node.js runtime for server-rendered applications. Create an application, start the development server, then edit application-owned files.</p><pre><code>npx intent-os create my-store
+cd my-store
+npx intent-os generate schema
+npx intent-os dev</code></pre><p>Open <code>http://localhost:3000</code>. The root page is the framework landing page, <code>/docs</code> is the developer portal, and the generated application pages are served by the same runtime.</p><h3>Verify before changing code</h3><pre><code>npx intent-os test
+npx intent-os generate schema --check</code></pre></section>
+
+      <section id="mental-model"><p class="guide-label">02 / Concepts</p><h2>The mental model</h2><p>You describe the application surface and domain model. The runtime supplies routing, rendering, validation, sessions, CSRF, database access, transactions, and HTML fragment enhancement.</p><div class="guide-flow"><div><b>Intent</b><small>pages · schema · config</small></div><span>→</span><div><b>Runtime</b><small>route · compile · validate</small></div><span>→</span><div><b>System</b><small>HTML · SQLite · state</small></div></div><p>IntentOS is intentionally constrained. It is strongest for server-rendered, form-heavy, data-backed sites and ecommerce workflows. It is not a replacement for React, a general visual builder, or a universal backend for arbitrary workloads.</p></section>
+
+      <section id="project-structure"><p class="guide-label">03 / Application</p><h2>Project structure</h2><pre><code>my-store/
+├─ pages/                 # routes and declarative HTML
+├─ src/data/              # application-owned seed/catalog data
+├─ public/                # application browser assets
+├─ schema.js              # source-of-truth data model
+├─ schema.sql             # generated schema artifact
+├─ migrations/            # additive database changes
+├─ app.config.js          # runtime configuration
+├─ theme.css              # application styling
+└─ package.json           # application scripts</code></pre><p>The framework owns the runtime under <code>framework/</code>. Do not edit generated <code>schema.sql</code> by hand; edit <code>schema.js</code> and regenerate it.</p></section>
+
+      <section id="pages"><p class="guide-label">04 / Reference</p><h2>Pages, routes, and syntax</h2><p>Every HTML file under <code>pages/</code> is a route. <code>index.html</code> represents the directory route. Square brackets create dynamic parameters.</p><pre><code>pages/index.html           → /
+pages/products/index.html → /products
+pages/products/[slug].html → /products/:slug
+pages/docs/guide.html      → /docs/guide</code></pre><h3>Resource lists</h3><pre><code>&lt;x-list of="Product" as="product" page="24"&gt;
+  &lt;article&gt;
+    &lt;a href="/products/{{product.slug}}"&gt;
+      &lt;h2&gt;{{product.name}}&lt;/h2&gt;
+      &lt;x-money value="{{product.price}}" currency="EUR" /&gt;
+    &lt;/a&gt;
+  &lt;/article&gt;
+&lt;/x-list&gt;</code></pre><h3>Records and control flow</h3><pre><code>&lt;x-record of="Product" by="slug" as="product"&gt;
+  &lt;h1&gt;{{product.name}}&lt;/h1&gt;
+  &lt;x-if test="product.active"&gt;Available&lt;/x-if&gt;
+  &lt;x-each in="product.tags" as="tag"&gt;{{tag}}&lt;/x-each&gt;
+&lt;/x-record&gt;</code></pre><p>Interpolation is HTML-escaped by default. The compiler does not evaluate arbitrary JavaScript expressions.</p></section>
+
+      <section id="data"><p class="guide-label">05 / Data</p><h2>Schema and data</h2><p><code>schema.js</code> defines tables, columns, constraints, foreign keys, and the schema version. The ecommerce starter includes products, categories, carts, orders, payments, webhook events, customers, and sessions.</p><pre><code>export default {
+  version: 1,
+  tables: {
+    notes: { columns: {
+      id: { type: 'TEXT', primaryKey: true },
+      body: { type: 'TEXT', notNull: true },
+    } },
+  },
+};</code></pre><p>Runtime resources expose intent-level operations such as <code>Product.list()</code>, while SQL stays inside the framework adapter. Values are parameterized; application pages do not write SQL.</p></section>
+
+      <section id="actions"><p class="guide-label">06 / Interaction</p><h2>Actions and forms</h2><p>Actions name framework-owned domain operations. The same form works with JavaScript disabled and can be enhanced into an HTML fragment request.</p><pre><code>&lt;form method="post" action="/_app/action/cart.add" data-action="cart.add"&gt;
+  &lt;input type="hidden" name="productId" value="{{product.id}}"&gt;
+  &lt;input type="number" name="quantity" value="1" min="1" max="99"&gt;
+  &lt;button type="submit"&gt;Add to cart&lt;/button&gt;
+&lt;/form&gt;</code></pre><p>Built-in actions include <code>auth.login</code>, <code>auth.logout</code>, <code>cart.add</code>, <code>cart.update</code>, <code>cart.remove</code>, <code>order.create</code>, <code>order.cancel</code>, and <code>checkout.create</code>.</p><p>Use <code>data-fragment="cart-summary"</code> and <code>data-fragment-target="cart-summary"</code> for replaceable HTML regions.</p></section>
+
+      <section id="state"><p class="guide-label">07 / Runtime</p><h2>State and navigation</h2><p>Persistent business state belongs on the server. The browser runtime manages only enhancement state such as pending controls, navigation, focusable fragments, and status messages.</p><ul><li>GET requests render complete HTML documents.</li><li>Enhanced requests can replace targeted fragments.</li><li>POST actions validate CSRF and input before mutation.</li><li>Successful ordinary forms redirect; enhanced forms receive HTML fragments.</li><li>Prices, inventory, payment state, and ownership are never trusted from the browser.</li></ul></section>
+
+      <section id="security"><p class="guide-label">08 / Production</p><h2>Security model</h2><ul><li>All mutations require a session-bound CSRF token.</li><li>Inputs reject unknown fields and validate domain constraints.</li><li>Cart prices are read from database truth.</li><li>Orders are checked against session or customer ownership.</li><li>Sessions rotate on login and logout.</li><li>HTML interpolation is escaped.</li><li>Stripe webhooks require raw-body signature verification.</li><li>Production requires <code>INTENT_OS_SESSION_SECRET</code>.</li></ul><p>Local email login is an identity scaffold, not proof of email ownership. Add a verified passwordless or OAuth provider before accepting real accounts.</p></section>
+
+      <section id="migrations"><p class="guide-label">09 / Operations</p><h2>Schema changes</h2><pre><code># edit schema.js
+npx intent-os generate schema
+npx intent-os generate migration add-customer-phone
+npx intent-os test
+npx intent-os generate schema --check</code></pre><p>Migrations are applied transactionally and recorded in <code>_intent_os_migrations</code>. The generator rejects removed tables, removed columns, changed existing columns, and unsafe non-null additions.</p></section>
+
+      <section id="payments"><p class="guide-label">10 / Integration</p><h2>Payments</h2><p>IntentOS uses Stripe-hosted Checkout. The server creates a Checkout Session from the authoritative order total. The browser never receives the Stripe secret. Payment completion is driven by:</p><pre><code>POST /_app/webhooks/stripe</code></pre><p>Configure <code>STRIPE_SECRET_KEY</code>, <code>STRIPE_WEBHOOK_SECRET</code>, public HTTPS, and a persistent database before live payments.</p></section>
+
+      <section id="testing"><p class="guide-label">11 / Quality</p><h2>Testing</h2><pre><code>npm test
+npx intent-os test
+npm run check</code></pre><p>Test malformed input, missing products, duplicate operations, ownership violations, transaction rollback, webhook replay, and no-JavaScript form fallback. Browser acceptance should cover keyboard navigation, mobile layouts, back/forward navigation, and failed requests.</p></section>
+
+      <section id="deployment"><p class="guide-label">12 / Launch</p><h2>Deployment checklist</h2><ol><li>Use Node.js 22.5 or newer.</li><li>Set <code>NODE_ENV=production</code>.</li><li>Set a stable high-entropy <code>INTENT_OS_SESSION_SECRET</code>.</li><li>Mount SQLite on a persistent single-host volume.</li><li>Run schema checks and migrations before traffic.</li><li>Configure Stripe secrets and webhook HTTPS.</li><li>Add an identity provider for verified accounts.</li><li>Configure backups, logs, monitoring, alerting, and restore drills.</li><li>Do not run multiple writers against the same SQLite file.</li></ol></section>
+
+      <section id="boundaries"><p class="guide-label">13 / Advanced</p><h2>Boundaries and extension</h2><p>IntentOS is currently an opinionated server-rendered ecommerce runtime. It supports custom pages, styles, catalog data, additive schema changes, and framework-owned actions. It does not currently provide a general component compiler, arbitrary client expressions, a visual layout generator, distributed caching, a PostgreSQL adapter, or a production identity provider.</p><p>When a requirement falls outside the supported model, extend the framework deliberately: add a resource/action contract, tests at the server boundary, documentation, and an explicit escape hatch. Do not silently place business authority in browser JavaScript.</p></section>
+      <footer class="guide-footer"><a href="/docs">← Developer portal</a><a href="/products">Try the demo store →</a></footer>
+    </article>
+  </div>
+</main>
